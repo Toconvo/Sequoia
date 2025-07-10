@@ -79,7 +79,14 @@ def check_volume(code_name, data, end_date=None, threshold=60):
     data['vol_ma5'] = pd.Series(tl.MA(data['成交量'].values, 5), index=data.index.values)
 
     if end_date is not None:
-        mask = (data['日期'] <= end_date)
+        # 统一转换为 datetime 类型进行比较
+        data_dates = pd.to_datetime(data['日期'])
+        end_date_dt = pd.to_datetime(end_date)
+
+        mask = (data_dates <= end_date_dt)
+        data = data.loc[mask]
+    else:
+        mask = pd.Series([True] * len(data))
         data = data.loc[mask]
     if data.empty:
         return False

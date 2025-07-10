@@ -142,5 +142,5 @@ $ python main.py
 ## 如何回测
 修改[config.yaml](config.yaml.example)中`end_date`为指定日期，格式为`'YYYY-MM-DD'`，如：
 ```
-end = '2019-06-17'
+end = '2025-07-10'
 ```

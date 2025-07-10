@@ -15,6 +15,7 @@ import push
 import logging
 import time
 import datetime
+import pandas as pd
 
 
 def prepare():
@@ -61,7 +62,10 @@ def check(stocks_data, strategy, strategy_func):
 def check_enter(end_date=None, strategy_fun=enter.check_volume):
     def end_date_filter(stock_data):
         if end_date is not None:
-            if end_date < stock_data[1].iloc[0].日期:  # 该股票在end_date时还未上市
+            # 统一转换为 datetime 对象进行比较
+            end_date_dt = pd.to_datetime(end_date)
+            stock_date_dt = pd.to_datetime(stock_data[1].iloc[0].日期)
+            if end_date_dt < stock_date_dt:  # 该股票在end_date时还未上市
                 logging.debug("{}在{}时还未上市".format(stock_data[0], end_date))
                 return False
         return strategy_fun(stock_data[0], stock_data[1], end_date=end_date)

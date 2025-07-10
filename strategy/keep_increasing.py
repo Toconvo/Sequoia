@@ -13,7 +13,10 @@ def check(code_name, data, end_date=None, threshold=30):
     data['ma30'] = pd.Series(tl.MA(data['收盘'].values, 30), index=data.index.values)
 
     if end_date is not None:
-        mask = (data['日期'] <= end_date)
+        # Ensure both sides are datetime objects
+        date_series = pd.to_datetime(data['日期'])
+        end_date_dt = pd.to_datetime(end_date)
+        mask = (date_series <= end_date_dt)
         data = data.loc[mask]
 
     data = data.tail(n=threshold)

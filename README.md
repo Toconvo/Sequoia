@@ -12,8 +12,8 @@
 
 安装 conda 后，切换到项目专属环境进行配置，例如：
 ```
-conda create -n sequoia39 python=3.9
-conda activate sequoia39
+conda create -n sequoia312 python=3.12
+conda activate sequoia312
 ```
 
  ### 根据不同的平台安装TA-Lib程序
@@ -68,14 +68,14 @@ conda activate sequoia39
     ```
     # 操作示例
     # 1. 创建专属 python 环境
-    conda create -n sequoia39 python=3.9
-    conda activate sequoia39
+    conda create -n sequoia312 python=3.12
+    conda activate sequoia312
     
     # 2. 安装 ta-lib 库
     arch -arm64 brew install ta-lib
     export TA_INCLUDE_PATH="$(brew --prefix ta-lib)/include"
     export TA_LIBRARY_PATH="$(brew --prefix ta-lib)/lib"
-    python3.9 -m pip install --no-cache-dir ta-lib
+    python3.12 -m pip install --no-cache-dir ta-lib
     
     # 3. 验证是否安装成功
     python -c "import talib; print(talib.__version__)"
@@ -96,7 +96,7 @@ conda activate sequoia39
     $ make
     $ sudo make install
     ```
- ### 推荐使用Python3.8以上以及pip3
+ ### 推荐使用Python3.12以上以及pip3
  ### Python 依赖:
  ```
  pip install -r requirements.txt 
@@ -133,7 +133,7 @@ $ python main.py
     SHELL=/bin/bash
     PATH=/usr/bin:/bin:/home/ubuntu/miniconda3/bin/
     # m h  dom mon dow   command
-    0 3 * * 1-5 source /home/ubuntu/miniconda3/bin/activate python3.10; python3 /home/ubuntu/Sequoia/main.py >> /home/ubuntu/Sequoia/sequoia.log; source /home/ubuntu/miniconda3/bin/deactivate
+    0 3 * * 1-5 source /home/ubuntu/miniconda3/bin/activate python3.12; python3 /home/ubuntu/Sequoia/main.py >> /home/ubuntu/Sequoia/sequoia.log; source /home/ubuntu/miniconda3/bin/deactivate
    ```
 #### 微信推送
 使用[WxPusher](https://wxpusher.zjiecode.com/docs/#/)实现了微信推送，用户需要自行获取[wxpusher_token](https://wxpusher.zjiecode.com/docs/#/?id=%e8%8e%b7%e5%8f%96apptoken)和[wxpusher_uid](https://wxpusher.zjiecode.com/docs/#/?id=%e8%8e%b7%e5%8f%96uid)，并配置到`config.yaml`中去。
@@ -144,4 +144,3 @@ $ python main.py
 ```
 end = '2019-06-17'
 ```
-

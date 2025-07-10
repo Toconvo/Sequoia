@@ -3,9 +3,10 @@
 import logging
 import settings
 from wxpusher import WxPusher
+from typing import Optional
 
 
-def push(msg):
+def push(msg: str):
     if settings.config['push']['enable']:
         response = WxPusher.send_message(msg, uids=[settings.config['push']['wxpusher_uid']],
                                          token=settings.config['push']['wxpusher_token'])
@@ -13,7 +14,7 @@ def push(msg):
     logging.info(msg)
 
 
-def statistics(msg=None):
+def statistics(msg: Optional[str]=None):
     push(msg)
 
 

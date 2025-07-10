@@ -5,6 +5,7 @@ import logging
 import talib as tl
 
 import concurrent.futures
+from typing import List, Tuple
 
 
 def fetch(code_name):
@@ -20,7 +21,7 @@ def fetch(code_name):
     return data
 
 
-def run(stocks):
+def run(stocks: List[Tuple[str, str]]):
     stocks_data = {}
     with concurrent.futures.ThreadPoolExecutor(max_workers=16) as executor:
         future_to_stock = {executor.submit(fetch, stock): stock for stock in stocks}

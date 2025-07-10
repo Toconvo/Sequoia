@@ -16,6 +16,8 @@ import logging
 import time
 import datetime
 import pandas as pd
+from pandas.core.frame import DataFrame
+from typing import Callable, Dict, List, Tuple
 
 
 def prepare():
@@ -45,7 +47,7 @@ def prepare():
 
     logging.info("************************ process   end ***************************************")
 
-def process(stocks, strategies):
+def process(stocks: List[Tuple[str, str]], strategies: Dict[str, Callable]):
     stocks_data = data_fetcher.run(stocks)
     for strategy, strategy_func in strategies.items():
         check(stocks_data, strategy, strategy_func)
@@ -75,7 +77,7 @@ def check_enter(end_date=None, strategy_fun=enter.check_volume):
 
 
 # 统计数据
-def statistics(all_data, stocks):
+def statistics(all_data: DataFrame, stocks: List[Tuple[str, str]]):
     limitup = len(all_data.loc[(all_data['涨跌幅'] >= 9.5)])
     limitdown = len(all_data.loc[(all_data['涨跌幅'] <= -9.5)])
 
